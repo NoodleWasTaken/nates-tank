@@ -32,6 +32,27 @@
         radial-gradient(circle at 70% 85%, rgba(34, 211, 238, 0.12), transparent 50%),
         linear-gradient(to bottom, var(--tank-mid), var(--tank-dark));
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* caustic lighting */
+    .caustics {
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: url('data:image/svg+xml,%3Csvg width="200" height="200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="f" x="0%25" y="0%25" width="100%25" height="100%25"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"/%3E%3CfeDiffuseLighting in="noise" lighting-color='rgba(255,255,255,0.07)' surfaceScale="10" result="light"%3E%3CfeDistantLight azimuth="45" elevation="45"/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width="200" height="200" filter="url(%23f)"/%3E%3C/svg%3E');
+      background-repeat: repeat;
+      pointer-events: none;
+      opacity: 0.15;
+      z-index: 1;
+      animation: moveCaustics 25s linear infinite;
+    }
+
+    @keyframes moveCaustics {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100px, -100px); }
     }
 
     /* waterline */
@@ -69,11 +90,18 @@
       transform: translateY(0px);
     }
 
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
     .container {
       width: 100%;
       max-width: 540px;
       position: relative;
-      z-index: 3;
+      z-index: 4;
     }
 
     header {
@@ -144,17 +172,10 @@
       color: var(--text-muted);
       opacity: 0.85;
     }
-      
-    /* particle canvas */
-    #particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
   </style>
 </head>
 <body>
+  <div class="caustics"></div>
   <div class="parallax" id="parallax"></div>
   <canvas id="particles"></canvas>
   <div class="waterline"></div>
@@ -208,7 +229,7 @@
       layer.style.transform = `translateY(${-offset}px)`;
     });
 
-    // particle system
+    // particle system with mouse reaction
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     let w, h;
