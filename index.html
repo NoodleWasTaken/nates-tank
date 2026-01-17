@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nate's Tank</title>
+  <link rel="icon" type="image/png" href="/mnt/data/aced4cc6-d875-4caa-a320-097c3c5c83c1.png">
 
   <style>
     :root {
@@ -14,6 +15,7 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #38bdf8;
+      --coming-soon: #f87171;
     }
 
     * { box-sizing: border-box; }
@@ -35,7 +37,6 @@
       position: relative;
     }
 
-    /* caustic lighting */
     .caustics {
       position: fixed;
       top: -50%;
@@ -55,7 +56,6 @@
       100% { transform: translate(-100px, -100px); }
     }
 
-    /* waterline */
     .waterline {
       position: fixed;
       top: 0;
@@ -73,7 +73,6 @@
       z-index: 2;
     }
 
-    /* parallax layer */
     .parallax {
       position: fixed;
       inset: 0;
@@ -135,7 +134,8 @@
       text-decoration: none;
       color: inherit;
       box-shadow: 0 18px 40px rgba(0,0,0,0.45);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+      position: relative;
     }
 
     .link:hover {
@@ -165,6 +165,19 @@
       white-space: nowrap;
     }
 
+    .coming-soon:hover {
+      color: var(--coming-soon);
+    }
+
+    .link[data-coming-soon]:hover::after {
+      content: 'Coming Soon...';
+      color: var(--coming-soon);
+      position: absolute;
+      right: 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
     footer {
       margin-top: 44px;
       text-align: center;
@@ -183,7 +196,7 @@
   <div class="container">
     <header>
       <h1>Nate's Tank</h1>
-      <p>All Things Fishy</p>
+      <p>All Things Fishy!</p>
     </header>
 
     <a class="link" href="https://open.spotify.com/show/50VvfEvflEgs5nTICngcRv?si=ogjxg9E9Q4-uZG_Bk5YdRw" target="_blank">
@@ -194,10 +207,10 @@
       <div class="pill">Podcast</div>
     </a>
 
-    <a class="link" href="https://your-link-here.com" target="_blank">
+    <a class="link coming-soon" data-coming-soon>
       <div class="link-text">
         <h2>Cryptid Thoughts</h2>
-        <span>Cryptids, folklore, and strange encounters</span>
+        <span>Hover to see status</span>
       </div>
       <div class="pill">Podcast</div>
     </a>
@@ -213,7 +226,7 @@
     <a class="link" href="https://discord.gg/yourinvite" target="_blank">
       <div class="link-text">
         <h2>Discord Community</h2>
-        <span>Hang out, discuss episodes, share ideas</span>
+        <span>Hang out, discuss, share ideas</span>
       </div>
       <div class="pill">Community</div>
     </a>
@@ -253,7 +266,7 @@
       r: Math.random() * 1.8 + 0.4,
       vx: Math.random() * 0.2 - 0.1,
       vy: Math.random() * 0.3 + 0.1,
-      a: Math.random() * 0.4 + 0.2
+      a: Math.random() * 0.2 + 0.2
     }));
 
     function draw() {
