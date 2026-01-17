@@ -136,6 +136,7 @@
       box-shadow: 0 18px 40px rgba(0,0,0,0.45);
       transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
       position: relative;
+      overflow: hidden;
     }
 
     .link:hover {
@@ -163,18 +164,13 @@
       font-size: 0.75rem;
       font-weight: 700;
       white-space: nowrap;
+      z-index: 2;
+      position: relative;
     }
 
-    .coming-soon:hover {
+    .coming-soon:hover .link-text span::after {
+      content: ' Coming Soon...';
       color: var(--coming-soon);
-    }
-
-    .link[data-coming-soon]:hover::after {
-      content: 'Coming Soon...';
-      color: var(--coming-soon);
-      position: absolute;
-      right: 24px;
-      font-size: 0.9rem;
       font-weight: 600;
     }
 
@@ -196,7 +192,7 @@
   <div class="container">
     <header>
       <h1>Nate's Tank</h1>
-      <p>All Things Fishy!</p>
+      <p>Aquatic & cryptid podcasts told like stories</p>
     </header>
 
     <a class="link" href="https://open.spotify.com/show/50VvfEvflEgs5nTICngcRv?si=ogjxg9E9Q4-uZG_Bk5YdRw" target="_blank">
@@ -207,7 +203,7 @@
       <div class="pill">Podcast</div>
     </a>
 
-    <a class="link coming-soon" data-coming-soon>
+    <a class="link coming-soon">
       <div class="link-text">
         <h2>Cryptid Thoughts</h2>
         <span>Hover to see status</span>
@@ -218,7 +214,7 @@
     <a class="link" href="https://www.tiktok.com/@natestank" target="_blank">
       <div class="link-text">
         <h2>TikTok</h2>
-        <span>Clips, updates, and tank tips</span>
+        <span>Clips, updates, and behind-the-scenes</span>
       </div>
       <div class="pill">Social</div>
     </a>
@@ -226,7 +222,7 @@
     <a class="link" href="https://discord.gg/yourinvite" target="_blank">
       <div class="link-text">
         <h2>Discord Community</h2>
-        <span>Hang out, discuss, share ideas</span>
+        <span>Hang out, discuss episodes, share ideas</span>
       </div>
       <div class="pill">Community</div>
     </a>
@@ -235,14 +231,12 @@
   </div>
 
   <script>
-    // parallax scroll
     const layer = document.getElementById('parallax');
     window.addEventListener('scroll', () => {
       const offset = window.scrollY * 0.15;
       layer.style.transform = `translateY(${-offset}px)`;
     });
 
-    // particle system with mouse reaction
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     let w, h;
@@ -271,34 +265,28 @@
 
     function draw() {
       ctx.clearRect(0, 0, w, h);
-
       for (const p of particles) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-
         if (dist < 120) {
           p.x += dx / dist * 0.6;
           p.y += dy / dist * 0.6;
         }
-
         p.x += p.vx;
         p.y -= p.vy;
-
         if (p.y < -10) {
           p.y = h + 10;
           p.x = Math.random() * w;
         }
         if (p.x < -10) p.x = w + 10;
         if (p.x > w + 10) p.x = -10;
-
         ctx.globalAlpha = p.a;
         ctx.fillStyle = 'rgba(255,255,255,0.45)';
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
-
       requestAnimationFrame(draw);
     }
 
