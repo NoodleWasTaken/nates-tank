@@ -7,42 +7,39 @@
 
   <style>
     :root {
-      --bg-deep: #020617;
-      --bg-mid: #020617cc;
-      --card-bg: rgba(15, 23, 42, 0.85);
-      --card-border: rgba(148, 163, 184, 0.15);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #38bdf8;
+      --ocean-light: #e6f6fb;
+      --ocean-mid: #b8e3f2;
+      --ocean-deep: #0b3c5d;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(0, 0, 0, 0.06);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--text-main);
-      background:
-        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(34, 211, 238, 0.08), transparent 45%),
-        linear-gradient(to bottom, #020617, #00040f);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px;
+      padding: 32px 20px;
+      background:
+        linear-gradient(to bottom, var(--ocean-light), var(--ocean-mid));
     }
 
-    /* subtle fish pattern */
+    /* wave layer */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 30c10-10 30-10 40 0-10 10-30 10-40 0z' fill='none' stroke='rgba(148,163,184,0.12)' stroke-width='2'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      opacity: 0.25;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230284c7' fill-opacity='0.08' d='M0,160L80,176C160,192,320,224,480,218.7C640,213,800,171,960,154.7C1120,139,1280,149,1360,154.7L1440,160L1440,0L1360,0L1280,0L1120,0L960,0L800,0L640,0L480,0L320,0L160,0L80,0L0,0Z'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: bottom;
       pointer-events: none;
     }
 
@@ -54,19 +51,19 @@
 
     header {
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
 
     header h1 {
-      font-size: 2.6rem;
-      margin: 0 0 6px 0;
-      letter-spacing: 0.5px;
+      font-size: 2.7rem;
+      margin: 0 0 8px 0;
+      font-weight: 700;
     }
 
     header p {
       margin: 0;
+      font-size: 1rem;
       color: var(--text-muted);
-      font-size: 0.95rem;
     }
 
     .link {
@@ -76,45 +73,45 @@
       gap: 16px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 18px 20px;
-      margin-bottom: 14px;
+      border-radius: 20px;
+      padding: 20px 22px;
+      margin-bottom: 16px;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .link:hover {
-      transform: translateY(-2px);
-      border-color: rgba(56, 189, 248, 0.45);
-      background: rgba(15, 23, 42, 0.95);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
     }
 
     .link-text h2 {
       margin: 0 0 4px 0;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 600;
     }
 
     .link-text span {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
     .pill {
-      padding: 6px 14px;
+      padding: 6px 16px;
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent);
+      background: var(--accent);
+      color: white;
       font-size: 0.75rem;
       font-weight: 600;
       white-space: nowrap;
     }
 
     footer {
-      margin-top: 36px;
+      margin-top: 40px;
       text-align: center;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
   </style>
@@ -123,13 +120,13 @@
   <div class="container">
     <header>
       <h1>Nate's Tank</h1>
-      <p>Podcasts & communities inspired by nature and storytelling</p>
+      <p>Podcasts & communities inspired by fish, nature, and storytelling</p>
     </header>
 
     <a class="link" href="https://your-link-here.com" target="_blank">
       <div class="link-text">
         <h2>Fishy Thoughts</h2>
-        <span>A reflective podcast about fish and ecosystems</span>
+        <span>A calm, reflective podcast about fish and ecosystems</span>
       </div>
       <div class="pill">Podcast</div>
     </a>
@@ -137,7 +134,7 @@
     <a class="link" href="https://your-link-here.com" target="_blank">
       <div class="link-text">
         <h2>Cryptid Thoughts</h2>
-        <span>Folklore, cryptids, and strange encounters</span>
+        <span>Cryptids, folklore, and strange stories</span>
       </div>
       <div class="pill">Podcast</div>
     </a>
@@ -158,9 +155,7 @@
       <div class="pill">Community</div>
     </a>
 
-    <footer>
-      © 2026 Nate's Tank
-    </footer>
+    <footer>© 2026 Nate's Tank</footer>
   </div>
 </body>
 </html>
