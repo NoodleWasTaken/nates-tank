@@ -144,10 +144,19 @@
       color: var(--text-muted);
       opacity: 0.85;
     }
+      
+    /* particle canvas */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
   <div class="parallax" id="parallax"></div>
+  <canvas id="particles"></canvas>
   <div class="waterline"></div>
 
   <div class="container">
@@ -192,15 +201,54 @@
   </div>
 
   <script>
+    // parallax scroll
     const layer = document.getElementById('parallax');
-    let lastScroll = 0;
-
     window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      const offset = scrolled * 0.15;
+      const offset = window.scrollY * 0.15;
       layer.style.transform = `translateY(${-offset}px)`;
-      lastScroll = scrolled;
     });
+
+    // particle system
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w, h;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const particles = Array.from({ length: 80 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.8 + 0.4,
+      s: Math.random() * 0.3 + 0.1,
+      a: Math.random() * 0.4 + 0.2
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+
+      for (const p of particles) {
+        ctx.globalAlpha = p.a;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.y -= p.s;
+        if (p.y < -10) {
+          p.y = h + 10;
+          p.x = Math.random() * w;
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
   </script>
 </body>
 </html>
