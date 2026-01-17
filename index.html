@@ -7,14 +7,14 @@
 
   <style>
     :root {
-      --ocean-light: #e6f6fb;
-      --ocean-mid: #b8e3f2;
-      --ocean-deep: #0b3c5d;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --card-border: rgba(0, 0, 0, 0.06);
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --accent: #0284c7;
+      --tank-dark: #081a24;
+      --tank-mid: #0f2e3d;
+      --tank-glass: rgba(255, 255, 255, 0.08);
+      --card-bg: rgba(12, 34, 48, 0.9);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #e6f6fb;
+      --text-muted: #9fb9c7;
+      --accent: #4cc9f0;
     }
 
     * { box-sizing: border-box; }
@@ -27,41 +27,62 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 32px 20px;
-      background: #cfeefd;
+      padding: 36px 20px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(76, 201, 240, 0.15), transparent 45%),
+        radial-gradient(circle at 70% 80%, rgba(72, 149, 239, 0.12), transparent 50%),
+        linear-gradient(to bottom, var(--tank-mid), var(--tank-dark));
     }
 
-    /* wave layer */
+    /* aquarium glass & light shimmer */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230284c7' fill-opacity='0.08' d='M0,160L80,176C160,192,320,224,480,218.7C640,213,800,171,960,154.7C1120,139,1280,149,1360,154.7L1440,160L1440,0L1360,0L1280,0L1120,0L960,0L800,0L640,0L480,0L320,0L160,0L80,0L0,0Z'/%3E%3C/svg%3E");
-      background-repeat: repeat-x;
-      background-position: bottom;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.04) 0px,
+          rgba(255,255,255,0.04) 1px,
+          transparent 2px,
+          transparent 120px
+        );
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    /* subtle bubbles */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='20' cy='90' r='3' fill='rgba(255,255,255,0.25)'/%3E%3Ccircle cx='60' cy='60' r='2' fill='rgba(255,255,255,0.2)'/%3E%3Ccircle cx='100' cy='30' r='3' fill='rgba(255,255,255,0.18)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      opacity: 0.25;
       pointer-events: none;
     }
 
     .container {
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       position: relative;
     }
 
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 42px;
     }
 
     header h1 {
-      font-size: 2.7rem;
+      font-size: 2.6rem;
       margin: 0 0 8px 0;
       font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
     header p {
       margin: 0;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
     }
 
@@ -69,25 +90,30 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 20px 22px;
-      margin-bottom: 16px;
+      border-radius: 22px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 20px 40px rgba(0,0,0,0.45);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
 
     .link:hover {
       transform: translateY(-3px);
-      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+      border-color: rgba(76, 201, 240, 0.6);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 26px 55px rgba(0,0,0,0.55);
     }
 
     .link-text h2 {
-      margin: 0 0 4px 0;
+      margin: 0 0 6px 0;
       font-size: 1.15rem;
       font-weight: 600;
     }
@@ -98,20 +124,21 @@
     }
 
     .pill {
-      padding: 6px 16px;
+      padding: 7px 18px;
       border-radius: 999px;
-      background: var(--accent);
-      color: white;
+      background: rgba(76, 201, 240, 0.18);
+      color: var(--accent);
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       white-space: nowrap;
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 44px;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
+      opacity: 0.85;
     }
   </style>
 </head>
@@ -119,13 +146,13 @@
   <div class="container">
     <header>
       <h1>Nate's Tank</h1>
-      <p>Podcasts & communities inspired by fish, nature, and storytelling</p>
+      <p>Aquatic & cryptid podcasts told like stories</p>
     </header>
 
     <a class="link" href="https://your-link-here.com" target="_blank">
       <div class="link-text">
         <h2>Fishy Thoughts</h2>
-        <span>A calm, reflective podcast about fish and ecosystems</span>
+        <span>Calm, reflective conversations about fish and ecosystems</span>
       </div>
       <div class="pill">Podcast</div>
     </a>
@@ -133,7 +160,7 @@
     <a class="link" href="https://your-link-here.com" target="_blank">
       <div class="link-text">
         <h2>Cryptid Thoughts</h2>
-        <span>Cryptids, folklore, and strange stories</span>
+        <span>Cryptids, folklore, and strange encounters</span>
       </div>
       <div class="pill">Podcast</div>
     </a>
