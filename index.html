@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nate's Tank</title>
+
+  <style>
+    :root {
+      --bg-deep: #020617;
+      --bg-mid: #020617cc;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --card-border: rgba(148, 163, 184, 0.15);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(34, 211, 238, 0.08), transparent 45%),
+        linear-gradient(to bottom, #020617, #00040f);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    /* subtle fish pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M10 30c10-10 30-10 40 0-10 10-30 10-40 0z' fill='none' stroke='rgba(148,163,184,0.12)' stroke-width='2'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      margin: 0 0 6px 0;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .link-text h2 {
+      margin: 0 0 4px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .link-text span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    footer {
+      margin-top: 36px;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Nate's Tank</h1>
+      <p>Podcasts & communities inspired by nature and storytelling</p>
+    </header>
+
+    <a class="link" href="https://your-link-here.com" target="_blank">
+      <div class="link-text">
+        <h2>Fishy Thoughts</h2>
+        <span>A reflective podcast about fish and ecosystems</span>
+      </div>
+      <div class="pill">Podcast</div>
+    </a>
+
+    <a class="link" href="https://your-link-here.com" target="_blank">
+      <div class="link-text">
+        <h2>Cryptid Thoughts</h2>
+        <span>Folklore, cryptids, and strange encounters</span>
+      </div>
+      <div class="pill">Podcast</div>
+    </a>
+
+    <a class="link" href="https://www.tiktok.com/@yourusername" target="_blank">
+      <div class="link-text">
+        <h2>TikTok</h2>
+        <span>Clips, updates, and behind-the-scenes</span>
+      </div>
+      <div class="pill">Social</div>
+    </a>
+
+    <a class="link" href="https://discord.gg/yourinvite" target="_blank">
+      <div class="link-text">
+        <h2>Discord Community</h2>
+        <span>Hang out, discuss episodes, share ideas</span>
+      </div>
+      <div class="pill">Community</div>
+    </a>
+
+    <footer>
+      © 2026 Nate's Tank
+    </footer>
+  </div>
+</body>
+</html>
